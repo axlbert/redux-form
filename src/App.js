@@ -1,21 +1,15 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import RegisterForm from './components/RegisterForm';
 
-class App extends Component {
-  render() {
+class RegisterFormContainer extends Component {
+  submit = values => {
+    window.alert(JSON.stringify(values, null, 4));
+  }
+  render () {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
+      <RegisterForm onSubmit={this.submit}/>
+      )
   }
 }
 
-export default App;
+export default RegisterFormContainer;
