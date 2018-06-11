@@ -4,17 +4,37 @@ import cx from 'classnames';
 
 export const customInput = props => {
 	const {label, input, type, meta } = props;
+
+	const getValidityClassname = meta => {
+		if (meta.active) {
+			return;
+		}
+		if (meta.touched && meta.invalid) {
+			return 'invalid';
+		}
+		if (meta.touched && meta.valid) {
+			return 'valid';
+		}
+	}
+
 	return (
 	<div
 		className={cx(
 			'custom-input-container',
 			{'flex-row-reverse' : type === 'checkbox'},
-			{ dirty : meta.dirty })}
+			{ dirty : meta.dirty },
+			getValidityClassname(meta)
+
+			)}
 		>
+
 		
 		<input {...input} type={type}/>
 		<label>{label}</label>
-		{(meta.error && meta.touched) && (
+		{meta.error &&
+			 meta.touched &&
+			 !meta.active && 
+			  (
 				<div className="feedback-text error-text">{meta.error}</div>
 				)}
 		{/*<ReactJson src={props.meta}/>*/}
